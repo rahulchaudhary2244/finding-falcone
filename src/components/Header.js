@@ -8,7 +8,9 @@ const Header = ({ handleResetClick, showReset }) => {
                 variant="h5"
                 noWrap
                 component="a"
-                href=""
+                href="https://www.geektrust.com/"
+                target="_blank"
+                rel="noopener"
                 sx={{
                     padding: '0 1rem',
                     mr: 2,
