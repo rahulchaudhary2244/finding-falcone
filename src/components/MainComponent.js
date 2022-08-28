@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Paper, Stack, styled, Typography } from '@mui/material';
+import {
+    Box,
+    Grid,
+    Paper,
+    Stack,
+    styled,
+    Typography,
+    Button,
+} from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
@@ -130,25 +138,30 @@ const MainComponent = () => {
             <Box className="section">
                 <HeroTitle />
                 <Stack
-                    // mt={{ xs: 1, sm: 2, md: 3 }}
                     direction={{ xs: 'column', lg: 'row' }}
                     justifyContent="center"
                     alignItems={{ xs: 'center', lg: 'flex-start' }}
-                    spacing={{ xs: 2, md: 4 }}
-                    sx={{ width: '95%', margin: '0 auto' }}
+                    spacing={{ xs: 5, md: 6 }}
+                    sx={{
+                        width: '95%',
+                        minHeight: { xs: '', md: '34rem' },
+                        margin: '0 auto',
+                    }}
                 >
                     <Grid
                         container
-                        spacing={4}
-                        sx={{ width: '100%', margin: '0 auto' }}
+                        spacing={{ xs: 2, md: 4 }}
+                        rowSpacing={{ xs: 5, md: 4 }}
+                        sx={{ width: '95%', margin: '0 auto' }}
                     >
                         {destinationArray.map((destination) => (
                             <Grid
                                 item
-                                xs={12}
-                                sm={6}
+                                xs={10}
+                                sm={5}
                                 lg={3}
                                 key={destination.key}
+                                sx={{ margin: '0 auto' }}
                             >
                                 <Item elevation={12}>
                                     <Destination
@@ -178,6 +191,7 @@ const MainComponent = () => {
                             component="h4"
                             sx={{
                                 fontWeight: 700,
+                                textAlign: 'center',
                             }}
                         >
                             {`Time taken: ${destinationArray.reduce(
@@ -187,7 +201,22 @@ const MainComponent = () => {
                         </Typography>
                     </Box>
                 </Stack>
+                <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
+                    <Button variant="contained">
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                padding: '0 0.5rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.1rem',
+                            }}
+                        >
+                            Find Falcone!
+                        </Typography>
+                    </Button>
+                </Box>
             </Box>
+
             {/* <Box className="footer">
                 <Footer />
             </Box> */}
