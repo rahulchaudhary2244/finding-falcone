@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Paper, Container, styled } from '@mui/material';
+import { Box, Grid, Paper, Stack, styled, Typography } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
 import { config, getDestinationArray } from '../utils/utility';
-import HeroTitle from './static_components/HeroTitle';
+import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
 
@@ -45,7 +45,7 @@ const MainComponent = () => {
                 };
             });
             setVehicles(buildVehicle);
-            return response.data;
+            return buildVehicle;
         } catch (err) {
             console.log('Fetching vehicles failed');
             return [];
@@ -77,22 +77,27 @@ const MainComponent = () => {
         setDestinationArray(getDestinationArray());
     };
 
-    // TODO: need to look into this
     const handleVehicleChange = (e) => {
         e.stopPropagation();
         const currName = e.target.name; //destination1
         const currValue = e.target.value; //Space pod
 
-        const oldSelectedValue =
-            destinationArray.find(
-                (destination) => destination.name === currName
-            ).selectedVehicle || '';
+        const destination = destinationArray.find(
+            (destination) => destination.name === currName
+        );
+
+        const oldSelectedValue = destination.selectedVehicle;
+
+        const currVehicle = vehicles.find(
+            (vehicle) => vehicle.name === currValue
+        );
 
         const builDestinations = destinationArray.map((item) => {
             if (item.name === currName)
                 return {
                     ...item,
                     selectedVehicle: currValue,
+                    timeTaken: item.distance / currVehicle.speed,
                 };
 
             return item;
@@ -122,8 +127,19 @@ const MainComponent = () => {
             </Box>
             <Box className="section">
                 <HeroTitle />
-                <Container maxWidth="xl">
-                    <Grid container spacing={4}>
+                <Stack
+                    // mt={{ xs: 1, sm: 2, md: 3 }}
+                    direction={{ xs: 'column', lg: 'row' }}
+                    justifyContent="center"
+                    alignItems={{ xs: 'center', lg: 'flex-start' }}
+                    spacing={{ xs: 2, md: 4 }}
+                    sx={{ width: '95%', margin: '0 auto' }}
+                >
+                    <Grid
+                        container
+                        spacing={4}
+                        sx={{ width: '100%', margin: '0 auto' }}
+                    >
                         {destinationArray.map((destination) => (
                             <Grid
                                 item
@@ -154,11 +170,25 @@ const MainComponent = () => {
                             </Grid>
                         ))}
                     </Grid>
-                </Container>
+                    <Box>
+                        <Typography
+                            variant="h4"
+                            component="h4"
+                            sx={{
+                                fontWeight: 700,
+                            }}
+                        >
+                            {`Time taken: ${destinationArray.reduce(
+                                (p, c) => p + c.timeTaken,
+                                0
+                            )}`}
+                        </Typography>
+                    </Box>
+                </Stack>
             </Box>
-            <Box className="footer">
+            {/* <Box className="footer">
                 <Footer />
-            </Box>
+            </Box> */}
         </Box>
     );
 };
