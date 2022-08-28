@@ -3,6 +3,7 @@ import { Box, Typography, Button } from '@mui/material';
 import Header from './Header';
 import { useHistory, useLocation } from 'react-router-dom';
 import ResultTitle from './ResultTitle';
+import Footer from './Footer';
 
 const FalconeResult = () => {
     const history = useHistory();
@@ -12,9 +13,7 @@ const FalconeResult = () => {
 
     return (
         <Box className="container">
-            <Box className="header">
-                <Header />
-            </Box>
+            <Header />
             <Box className="section">
                 <ResultTitle result={result} timeTaken={timeTaken} />
                 <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
@@ -36,10 +35,7 @@ const FalconeResult = () => {
                     </Button>
                 </Box>
             </Box>
-
-            {/* <Box className="footer">
-                <Footer />
-            </Box> */}
+            <Footer />
         </Box>
     );
 };

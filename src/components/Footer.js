@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Footer = () => {
     return (
@@ -12,6 +12,7 @@ const Footer = () => {
                     letterSpacing: '0.1rem',
                     color: 'white',
                     textDecoration: 'none',
+                    textAlign: 'center',
                 }}
             >
                 Challenge by geektrust.in
