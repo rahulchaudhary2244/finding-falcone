@@ -35,6 +35,38 @@
             * {
                 margin: 0;
             }
+
+            /* width */
+            ::-webkit-scrollbar {
+                width: 0.7rem;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 5px #00000070;
+                border-radius: 0.2rem;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #6c0875;
+                border-radius: 0.2rem;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #161313c7;
+            }
+
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .hide-scrollbar {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
         </style>
     </head>
     <body>
