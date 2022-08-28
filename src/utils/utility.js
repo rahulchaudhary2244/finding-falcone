@@ -9,7 +9,19 @@ const headersList = {
     'Content-Type': 'application/json',
 };
 
-const getToken = () => sessionStorage.getItem('token');
+const getToken = async () => {
+    const API_URL = `${config.endpoint}/token`;
+    const header = {
+        headers: headersList,
+    };
+    try {
+        const response = await axios.post(API_URL, {}, header);
+        return response.data.token;
+    } catch (err) {
+        console.log('Token not generated');
+        return null;
+    }
+};
 
 const getDestinationArray = () => [
     {

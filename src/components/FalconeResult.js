@@ -1,19 +1,22 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import Header from './Header';
-import HeroTitle from './stateless/HeroTitle';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import ResultTitle from './ResultTitle';
 
 const FalconeResult = () => {
     const history = useHistory();
+    const location = useLocation();
+
+    const { result, timeTaken } = location.state;
 
     return (
         <Box className="container">
             <Box className="header">
-                <Header showBack={true} />
+                <Header />
             </Box>
             <Box className="section">
-                <HeroTitle />
+                <ResultTitle result={result} timeTaken={timeTaken} />
                 <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
                     <Button
                         variant="contained"

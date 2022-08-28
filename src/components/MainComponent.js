@@ -21,7 +21,6 @@ import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
 import { useHistory } from 'react-router-dom';
-import { persistTokken } from '../utils/beforeLoadConfig';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -37,7 +36,6 @@ const MainComponent = () => {
     const [destinationArray, setDestinationArray] = useState(
         getDestinationArray()
     );
-    const [result, setResult] = useState({});
     const history = useHistory();
 
     const getPlanets = async () => {
@@ -72,7 +70,7 @@ const MainComponent = () => {
     const postFindFalcone = async () => {
         const API_URL = `${config.endpoint}/find`;
         const payload = {
-            token: persistTokken(), //getToken(),
+            token: await getToken(),
             planet_names: destinationArray.map(({ value }) => value),
             vehicle_names: destinationArray.map(
                 ({ selectedVehicle }) => selectedVehicle
@@ -82,18 +80,19 @@ const MainComponent = () => {
             headers: headersList,
         };
         try {
-            // const response = await axios.post(API_URL, payload, header);
-            // console.log(response.data);
-            // if (response.data.status === 'success') {
-            //     console.log(' planet found -> redirect to new page');
-            // } else {
-            //     console.log('planet not found');
-            // }
-            history.push('/result');
-            // setResult(response.data);
+            const response = await axios.post(API_URL, payload, header);
+            history.push({
+                pathname: '/result',
+                state: {
+                    result: response.data,
+                    timeTaken: destinationArray.reduce(
+                        (p, c) => p + c.timeTaken,
+                        0
+                    ),
+                },
+            });
         } catch (err) {
             console.log(err.response.data.error);
-            setResult(err.response.data.error);
         }
     };
 
