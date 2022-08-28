@@ -48,12 +48,4 @@ const getDestinationArray = () => [
     },
 ];
 
-const filterPlanets = (planets, destinationArray, key) => {
-    const names = destinationArray
-        .filter((item) => item.key !== key && item.value.length)
-        .map((item) => item.value);
-    const arr = planets.filter(({ name }) => !!!names.includes(name));
-    return arr;
-};
-
-export { config, headersList, getToken, getDestinationArray, filterPlanets };
+export { config, headersList, getToken, getDestinationArray };
