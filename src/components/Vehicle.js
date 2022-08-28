@@ -28,7 +28,7 @@ const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
                                 disabled={isDisbaled(max_distance, total_no)}
                                 value={name}
                                 control={<Radio />}
-                                label={`${name} (${total_no}) ${speed}`}
+                                label={`${name} (${total_no})`}
                             />
                         )
                     )}

@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Paper, Stack, styled, Typography } from '@mui/material';
+import {
+    Box,
+    Grid,
+    Paper,
+    Stack,
+    styled,
+    Typography,
+    Button,
+} from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
-import { config, getDestinationArray } from '../utils/utility';
+import {
+    config,
+    getDestinationArray,
+    getToken,
+    headersList,
+} from '../utils/utility';
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
@@ -49,6 +62,31 @@ const MainComponent = () => {
         } catch (err) {
             console.log('Fetching vehicles failed');
             return [];
+        }
+    };
+
+    const postFindFalcone = async () => {
+        const API_URL = `${config.endpoint}/find`;
+        const payload = {
+            token: getToken(),
+            planet_names: destinationArray.map(({ value }) => value),
+            vehicle_names: destinationArray.map(
+                ({ selectedVehicle }) => selectedVehicle
+            ),
+        };
+        const header = {
+            headers: headersList,
+        };
+        try {
+            const response = await axios.post(API_URL, payload, header);
+            console.log(response.data);
+            if (response.data.status === 'success') {
+                console.log(' planet found -> redirect to new page');
+            } else {
+                console.log('planet not found');
+            }
+        } catch (err) {
+            console.log(err.response.data.error);
         }
     };
 
@@ -122,6 +160,11 @@ const MainComponent = () => {
         setVehicles(buildVehicle);
     };
 
+    const handleFindFalconeClick = (e) => {
+        e.stopPropagation();
+        postFindFalcone();
+    };
+
     return (
         <Box className="container">
             <Box className="header">
@@ -130,25 +173,30 @@ const MainComponent = () => {
             <Box className="section">
                 <HeroTitle />
                 <Stack
-                    // mt={{ xs: 1, sm: 2, md: 3 }}
                     direction={{ xs: 'column', lg: 'row' }}
                     justifyContent="center"
                     alignItems={{ xs: 'center', lg: 'flex-start' }}
-                    spacing={{ xs: 2, md: 4 }}
-                    sx={{ width: '95%', margin: '0 auto' }}
+                    spacing={{ xs: 5, md: 6 }}
+                    sx={{
+                        width: '95%',
+                        minHeight: { xs: '', md: '34rem' },
+                        margin: '0 auto',
+                    }}
                 >
                     <Grid
                         container
-                        spacing={4}
-                        sx={{ width: '100%', margin: '0 auto' }}
+                        spacing={{ xs: 2, md: 4 }}
+                        rowSpacing={{ xs: 5, md: 4 }}
+                        sx={{ width: '95%', margin: '0 auto' }}
                     >
                         {destinationArray.map((destination) => (
                             <Grid
                                 item
-                                xs={12}
-                                sm={6}
+                                xs={10}
+                                sm={5}
                                 lg={3}
                                 key={destination.key}
+                                sx={{ margin: '0 auto' }}
                             >
                                 <Item elevation={12}>
                                     <Destination
@@ -178,6 +226,7 @@ const MainComponent = () => {
                             component="h4"
                             sx={{
                                 fontWeight: 700,
+                                textAlign: 'center',
                             }}
                         >
                             {`Time taken: ${destinationArray.reduce(
@@ -187,7 +236,26 @@ const MainComponent = () => {
                         </Typography>
                     </Box>
                 </Stack>
+                <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
+                    <Button
+                        variant="contained"
+                        onClick={handleFindFalconeClick}
+                    >
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                padding: '0 0.5rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.1rem',
+                                textTransform: 'capitalize',
+                            }}
+                        >
+                            Find Falcone! 🚀
+                        </Typography>
+                    </Button>
+                </Box>
             </Box>
+
             {/* <Box className="footer">
                 <Footer />
             </Box> */}

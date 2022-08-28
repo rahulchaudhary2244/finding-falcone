@@ -12,19 +12,21 @@ const HeroTitle = () => {
             spacing={{ xs: 1, sm: 2, md: 3 }}
         >
             <Typography
-                variant="h4"
-                component="h4"
+                variant="h3"
+                component="h3"
                 sx={{
                     fontWeight: 700,
+                    textAlign: 'center',
                 }}
             >
                 Finding Falcone!
             </Typography>
             <Typography
-                variant="h6"
-                component="h6"
+                variant="h5"
+                component="h5"
                 sx={{
                     fontWeight: 700,
+                    textAlign: 'center',
                 }}
             >
                 Select planets you want to search in:
