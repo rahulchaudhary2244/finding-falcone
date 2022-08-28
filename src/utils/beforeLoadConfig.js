@@ -1,7 +1,7 @@
 import { config, headersList } from './utility';
 import axios from 'axios';
 
-const persistTokken = async () => {
+export const persistTokken = async () => {
     const API_URL = `${config.endpoint}/token`;
     const header = {
         headers: headersList,

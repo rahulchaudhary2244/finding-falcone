@@ -20,6 +20,8 @@ import {
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
+import { useHistory } from 'react-router-dom';
+import { persistTokken } from '../utils/beforeLoadConfig';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -35,6 +37,8 @@ const MainComponent = () => {
     const [destinationArray, setDestinationArray] = useState(
         getDestinationArray()
     );
+    const [result, setResult] = useState({});
+    const history = useHistory();
 
     const getPlanets = async () => {
         try {
@@ -68,7 +72,7 @@ const MainComponent = () => {
     const postFindFalcone = async () => {
         const API_URL = `${config.endpoint}/find`;
         const payload = {
-            token: getToken(),
+            token: persistTokken(), //getToken(),
             planet_names: destinationArray.map(({ value }) => value),
             vehicle_names: destinationArray.map(
                 ({ selectedVehicle }) => selectedVehicle
@@ -78,15 +82,18 @@ const MainComponent = () => {
             headers: headersList,
         };
         try {
-            const response = await axios.post(API_URL, payload, header);
-            console.log(response.data);
-            if (response.data.status === 'success') {
-                console.log(' planet found -> redirect to new page');
-            } else {
-                console.log('planet not found');
-            }
+            // const response = await axios.post(API_URL, payload, header);
+            // console.log(response.data);
+            // if (response.data.status === 'success') {
+            //     console.log(' planet found -> redirect to new page');
+            // } else {
+            //     console.log('planet not found');
+            // }
+            history.push('/result');
+            // setResult(response.data);
         } catch (err) {
             console.log(err.response.data.error);
+            setResult(err.response.data.error);
         }
     };
 
@@ -168,7 +175,7 @@ const MainComponent = () => {
     return (
         <Box className="container">
             <Box className="header">
-                <Header handleResetClick={handleResetClick} />
+                <Header showReset={true} handleResetClick={handleResetClick} />
             </Box>
             <Box className="section">
                 <HeroTitle />
