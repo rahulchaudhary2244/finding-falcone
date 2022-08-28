@@ -11,7 +11,12 @@ import {
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
-import { config, getDestinationArray } from '../utils/utility';
+import {
+    config,
+    getDestinationArray,
+    getToken,
+    headersList,
+} from '../utils/utility';
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
@@ -57,6 +62,31 @@ const MainComponent = () => {
         } catch (err) {
             console.log('Fetching vehicles failed');
             return [];
+        }
+    };
+
+    const postFindFalcone = async () => {
+        const API_URL = `${config.endpoint}/find`;
+        const payload = {
+            token: getToken(),
+            planet_names: destinationArray.map(({ value }) => value),
+            vehicle_names: destinationArray.map(
+                ({ selectedVehicle }) => selectedVehicle
+            ),
+        };
+        const header = {
+            headers: headersList,
+        };
+        try {
+            const response = await axios.post(API_URL, payload, header);
+            console.log(response.data);
+            if (response.data.status === 'success') {
+                console.log(' planet found -> redirect to new page');
+            } else {
+                console.log('planet not found');
+            }
+        } catch (err) {
+            console.log(err.response.data.error);
         }
     };
 
@@ -128,6 +158,11 @@ const MainComponent = () => {
         });
         setDestinationArray(builDestinations);
         setVehicles(buildVehicle);
+    };
+
+    const handleFindFalconeClick = (e) => {
+        e.stopPropagation();
+        postFindFalcone();
     };
 
     return (
@@ -202,16 +237,20 @@ const MainComponent = () => {
                     </Box>
                 </Stack>
                 <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
-                    <Button variant="contained">
+                    <Button
+                        variant="contained"
+                        onClick={handleFindFalconeClick}
+                    >
                         <Typography
                             variant="h6"
                             sx={{
                                 padding: '0 0.5rem',
                                 fontWeight: 700,
                                 letterSpacing: '0.1rem',
+                                textTransform: 'capitalize',
                             }}
                         >
-                            Find Falcone!
+                            Find Falcone! 🚀
                         </Typography>
                     </Button>
                 </Box>
