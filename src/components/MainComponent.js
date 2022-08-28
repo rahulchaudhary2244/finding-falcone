@@ -23,11 +23,11 @@ import Vehicle from './Vehicle';
 import { useHistory } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f0f0d0',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary, //#641db933
 }));
 
 const MainComponent = () => {
@@ -173,9 +173,7 @@ const MainComponent = () => {
 
     return (
         <Box className="container">
-            <Box className="header">
-                <Header showReset={true} handleResetClick={handleResetClick} />
-            </Box>
+            <Header showReset={true} handleResetClick={handleResetClick} />
             <Box className="section">
                 <HeroTitle />
                 <Stack
@@ -185,7 +183,7 @@ const MainComponent = () => {
                     spacing={{ xs: 5, md: 6 }}
                     sx={{
                         width: '95%',
-                        minHeight: { xs: '', md: '34rem' },
+                        minHeight: { xs: '', md: '18rem' },
                         margin: '0 auto',
                     }}
                 >
@@ -238,11 +236,15 @@ const MainComponent = () => {
                             {`Time taken: ${destinationArray.reduce(
                                 (p, c) => p + c.timeTaken,
                                 0
-                            )}`}
+                            )} ⏰`}
                         </Typography>
                     </Box>
                 </Stack>
-                <Box sx={{ padding: { xs: '2rem 0', md: '1rem 0', lg: '0' } }}>
+                <Box
+                    sx={{
+                        padding: { xs: '2rem 0', md: '1rem 0', lg: '2rem 0 0' },
+                    }}
+                >
                     <Button
                         variant="contained"
                         onClick={handleFindFalconeClick}
@@ -261,10 +263,7 @@ const MainComponent = () => {
                     </Button>
                 </Box>
             </Box>
-
-            {/* <Box className="footer">
-                <Footer />
-            </Box> */}
+            <Footer />
         </Box>
     );
 };

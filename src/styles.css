@@ -1,33 +1,32 @@
 .App {
     width: 100%;
-    height: 100vh;
-    background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%);
+    /* background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%); */
+    background-color: #4158d0;
+    background-image: linear-gradient(
+        43deg,
+        #4158d0 0%,
+        #c850c0 46%,
+        #ffcc70 100%
+    );
 }
 
 .container {
     width: 100%;
-    min-height: 100%;
 }
 
 .header {
     width: 100%;
-    height: 5%;
+    height: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
-    background: linear-gradient(
-        90deg,
-        #4d0655f2 11%,
-        #4d0655f4 24%,
-        #0d95b6f9 85%,
-        #00e0ffe3 100%
-    );
+    background: linear-gradient(109.6deg, #000000de 50.2%, #f8f0f0 10.9%);
 }
 
 .section {
     width: 100%;
-    height: 91%;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,10 +34,10 @@
 
 .footer {
     width: 100%;
-    height: 4%;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    background: linear-gradient(90deg, #43fd1dc0 7%, #e0bc3f 45%);
+    background: #000000de;
 }

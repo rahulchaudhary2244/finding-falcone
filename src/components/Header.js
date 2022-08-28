@@ -12,7 +12,7 @@ const Header = ({ handleResetClick, showReset }) => {
                 sx={{
                     padding: '0 1rem',
                     mr: 2,
-                    display: { xs: 'none', sm: 'flex' },
+                    display: { xs: showReset ? 'none' : 'flex', sm: 'flex' },
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     letterSpacing: '0.2rem',
