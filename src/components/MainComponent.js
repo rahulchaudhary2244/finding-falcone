@@ -74,6 +74,8 @@ const MainComponent = () => {
 
     const handleResetClick = (e) => {
         e.stopPropagation();
+        getPlanets();
+        getVehicles();
         setDestinationArray(getDestinationArray());
     };
 
