@@ -21,15 +21,17 @@ const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
                     name={name}
                     onChange={handleVehicleChange}
                 >
-                    {vehicles.map(({ name, total_no, max_distance }, idx) => (
-                        <FormControlLabel
-                            key={idx}
-                            disabled={isDisbaled(max_distance, total_no)}
-                            value={name}
-                            control={<Radio />}
-                            label={`${name} (${total_no}) ${max_distance}`}
-                        />
-                    ))}
+                    {vehicles.map(
+                        ({ name, total_no, max_distance, speed }, idx) => (
+                            <FormControlLabel
+                                key={idx}
+                                disabled={isDisbaled(max_distance, total_no)}
+                                value={name}
+                                control={<Radio />}
+                                label={`${name} (${total_no}) ${speed}`}
+                            />
+                        )
+                    )}
                 </RadioGroup>
             </FormControl>
         </Box>

@@ -17,6 +17,7 @@ const getDestinationArray = () => [
         value: '',
         distance: 0,
         selectedVehicle: '',
+        timeTaken: 0,
     },
     {
         key: 2,
@@ -25,6 +26,7 @@ const getDestinationArray = () => [
         value: '',
         distance: 0,
         selectedVehicle: '',
+        timeTaken: 0,
     },
     {
         key: 3,
@@ -33,6 +35,7 @@ const getDestinationArray = () => [
         value: '',
         distance: 0,
         selectedVehicle: '',
+        timeTaken: 0,
     },
     {
         key: 4,
@@ -41,6 +44,7 @@ const getDestinationArray = () => [
         value: '',
         distance: 0,
         selectedVehicle: '',
+        timeTaken: 0,
     },
 ];
 
