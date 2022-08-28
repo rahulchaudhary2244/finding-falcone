@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 
-const Header = ({ handleResetClick }) => {
+const Header = ({ handleResetClick, showReset }) => {
     return (
         <Box className="header">
             <Typography
@@ -22,20 +22,22 @@ const Header = ({ handleResetClick }) => {
             >
                 GEEKTRUST
             </Typography>
-            <Button onClick={handleResetClick} variant="button">
-                <Typography
-                    variant="h6"
-                    sx={{
-                        padding: '0 1rem',
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '0.1rem',
-                        color: { xs: 'white', sm: '#4d0655f2' },
-                    }}
-                >
-                    RESET
-                </Typography>
-            </Button>
+            {showReset && (
+                <Button onClick={handleResetClick} variant="button">
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            padding: '0 1rem',
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '0.1rem',
+                            color: { xs: 'white', sm: '#4d0655f2' },
+                        }}
+                    >
+                        RESET
+                    </Typography>
+                </Button>
+            )}
         </Box>
     );
 };
