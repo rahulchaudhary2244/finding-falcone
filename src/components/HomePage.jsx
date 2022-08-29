@@ -43,6 +43,10 @@ const HomePage = () => {
     );
     const history = useHistory();
 
+    /**
+     *
+     * @returns {Promise.Array.<PlanetItem>}
+     */
     const getPlanets = async () => {
         const API_URL = `${config.endpoint}/planets`;
         try {
@@ -57,6 +61,10 @@ const HomePage = () => {
         }
     };
 
+    /**
+     *
+     * @returns {Promise.Array<VehileItem>}
+     */
     const getVehicles = async () => {
         const API_URL = `${config.endpoint}/vehicles`;
         try {
@@ -71,6 +79,9 @@ const HomePage = () => {
         }
     };
 
+    /**
+     * Make a POST request to get result of finding falcone and route to /result
+     */
     const postFindFalcone = async () => {
         const API_URL = `${config.endpoint}/find`;
         const payload = {
@@ -104,6 +115,10 @@ const HomePage = () => {
         getVehicles();
     }, []);
 
+    /**
+     *
+     * @param {Object} e accepts onChange event on select dropdown
+     */
     const handleDropdownChange = (e) => {
         e.stopPropagation();
         const newDestinations = destinationArray.map((item) => {
@@ -119,6 +134,10 @@ const HomePage = () => {
         setDestinationArray(newDestinations);
     };
 
+    /**
+     *
+     * @param {Object} e accepts onClick event
+     */
     const handleResetClick = (e) => {
         e.stopPropagation();
         getPlanets();
@@ -126,6 +145,10 @@ const HomePage = () => {
         setDestinationArray(defaultDestinationArray);
     };
 
+    /**
+     *
+     * @param {Object} e accepts onChange event on radio button
+     */
     const handleVehicleChange = (e) => {
         e.stopPropagation();
         //currDestination = destination1
@@ -155,6 +178,10 @@ const HomePage = () => {
         setVehicles(buildVehicle);
     };
 
+    /**
+     *
+     * @param {Object} e accepts onClick event
+     */
     const handleFindFalconeClick = (e) => {
         e.stopPropagation();
         postFindFalcone();

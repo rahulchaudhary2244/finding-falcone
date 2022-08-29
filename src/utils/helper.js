@@ -1,14 +1,34 @@
-const getFilteredPlanetsByKey = (destinations, planets, key, value) => {
+/**
+ *
+ * @param {Array.<DestinationItem>} destinations
+ * @param {Array.<PlanetItem} planets
+ * @param {string} key
+ * @param {string} value
+ * @returns {Array.<PlanetItem>}
+ */
+const getPlanetsAvailableForSelection = (destinations, planets, key, value) => {
     const names = destinations
         .filter((item) => item[key] !== value && !!item.selectedPlanet)
         .map((item) => item.selectedPlanet);
-    const arr = planets.filter(({ name }) => !!!names.includes(name));
-    return arr;
+    return planets.filter(({ name }) => !!!names.includes(name));
 };
 
+/**
+ *
+ * @param {Array} array
+ * @param {string} key
+ * @returns {number}
+ */
 const getTotalByKey = (array, key) =>
     array.reduce((previous, current) => previous + current[key], 0);
 
+/**
+ *
+ * @param {Array.<VehileItem} vehicles
+ * @param {string} oldVehicleName
+ * @param {string} newVehicleName
+ * @returns {Array.VehileItem}
+ */
 const getVehiclesWithUpdatedTotalNoCount = (
     vehicles,
     oldVehicleName,
@@ -31,6 +51,13 @@ const getVehiclesWithUpdatedTotalNoCount = (
         return vehicle;
     });
 
+/**
+ *
+ * @param {Array.<DestinationItem} destinations
+ * @param {string} destinationName
+ * @param {VehileItem} vehicle
+ * @returns {Array.<DestinationItem>}
+ */
 const getDestinationsWithNewVehicle = (
     destinations,
     destinationName,
@@ -50,5 +77,5 @@ export {
     getTotalByKey,
     getVehiclesWithUpdatedTotalNoCount,
     getDestinationsWithNewVehicle,
-    getFilteredPlanetsByKey,
+    getPlanetsAvailableForSelection,
 };

@@ -9,6 +9,13 @@ import {
 
 const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
     const { name, planetDistance, selectedVehicle } = destination;
+
+    /**
+     *
+     * @param {number} max_distance
+     * @param {number} available_count
+     * @returns {boolean}
+     */
     const isDisbaled = (max_distance, available_count) =>
         planetDistance > max_distance || available_count === 0;
 
@@ -21,17 +28,15 @@ const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
                     name={name}
                     onChange={handleVehicleChange}
                 >
-                    {vehicles.map(
-                        ({ name, total_no, max_distance, speed }, idx) => (
-                            <FormControlLabel
-                                key={idx}
-                                disabled={isDisbaled(max_distance, total_no)}
-                                value={name}
-                                control={<Radio />}
-                                label={`${name} (${total_no})`}
-                            />
-                        )
-                    )}
+                    {vehicles.map(({ name, total_no, max_distance }, idx) => (
+                        <FormControlLabel
+                            key={idx}
+                            disabled={isDisbaled(max_distance, total_no)}
+                            value={name}
+                            control={<Radio />}
+                            label={`${name} (${total_no})`}
+                        />
+                    ))}
                 </RadioGroup>
             </FormControl>
         </Box>
