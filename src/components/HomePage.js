@@ -11,15 +11,17 @@ import {
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
+import { getToken } from '../utils/utility';
 import {
-    config,
-    defaultDestinationArray,
-    getToken,
-    headersList,
     getTotalByKey,
     getVehiclesWithUpdatedTotalNoCount,
     getDestinationsWithNewVehicle,
-} from '../utils/utility';
+} from '../utils/helper';
+import {
+    config,
+    defaultDestinationArray,
+    headersList,
+} from '../utils/constants';
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
