@@ -1,3 +1,11 @@
+const getFilteredPlanetsByKey = (destinations, planets, key, value) => {
+    const names = destinations
+        .filter((item) => item[key] !== value && !!item.selectedPlanet)
+        .map((item) => item.selectedPlanet);
+    const arr = planets.filter(({ name }) => !!!names.includes(name));
+    return arr;
+};
+
 const getTotalByKey = (array, key) =>
     array.reduce((previous, current) => previous + current[key], 0);
 
@@ -42,4 +50,5 @@ export {
     getTotalByKey,
     getVehiclesWithUpdatedTotalNoCount,
     getDestinationsWithNewVehicle,
+    getFilteredPlanetsByKey,
 };
