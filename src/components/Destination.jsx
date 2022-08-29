@@ -7,6 +7,7 @@ import {
     InputLabel,
     Select,
 } from '@mui/material';
+import { getFilteredPlanetsByKey } from '../utils/helper';
 
 const Destination = ({
     handleDropdownChange,
@@ -14,16 +15,14 @@ const Destination = ({
     destinationArray,
     planets,
 }) => {
-    const filterPlanets = (key) => {
-        const names = destinationArray
-            .filter((item) => item.key !== key && !!item.selectedPlanet)
-            .map((item) => item.selectedPlanet);
-        const arr = planets.filter(({ name }) => !!!names.includes(name));
-        return arr;
-    };
+    const { selectedPlanet, label, name, planetDistance } = destination;
 
-    const { selectedPlanet, label, name, planetDistance, key } = destination;
-    const filteredPlanets = filterPlanets(key);
+    const filteredPlanets = getFilteredPlanetsByKey(
+        destinationArray,
+        planets,
+        'name',
+        name
+    );
 
     return (
         <>

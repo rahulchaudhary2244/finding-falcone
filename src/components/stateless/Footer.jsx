@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { footerData } from '../utils/constants';
+import { footerData } from '../../utils/constants';
+// import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Footer = () => {
     return (
@@ -24,6 +25,7 @@ const Footer = () => {
                     }}
                 >
                     {item.text}
+                    {/* <GitHubIcon /> */}
                 </Typography>
             ))}
         </Box>
