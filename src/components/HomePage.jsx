@@ -113,7 +113,7 @@ const HomePage = () => {
                 selectedPlanet: e.target.value,
                 planetDistance: planets.find(
                     (planet) => planet.name === e.target.value
-                ).planetDistance,
+                ).distance,
             };
         });
         setDestinationArray(newDestinations);
