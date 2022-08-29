@@ -73,7 +73,9 @@ const HomePage = () => {
         const API_URL = `${config.endpoint}/find`;
         const payload = {
             token: await getToken(),
-            planet_names: destinationArray.map(({ value }) => value),
+            planet_names: destinationArray.map(
+                ({ selectedPlanet }) => selectedPlanet
+            ),
             vehicle_names: destinationArray.map(
                 ({ selectedVehicle }) => selectedVehicle
             ),
@@ -106,10 +108,10 @@ const HomePage = () => {
             if (item.name !== e.target.name) return item;
             return {
                 ...item,
-                value: e.target.value,
-                distance: planets.find(
+                selectedPlanet: e.target.value,
+                planetDistance: planets.find(
                     (planet) => planet.name === e.target.value
-                ).distance,
+                ).planetDistance,
             };
         });
         setDestinationArray(newDestinations);
@@ -196,7 +198,7 @@ const HomePage = () => {
                                             handleDropdownChange
                                         }
                                     />
-                                    {!!destination.value && (
+                                    {!!destination.selectedPlanet && (
                                         <Vehicle
                                             vehicles={vehicles}
                                             destination={destination}
