@@ -17,6 +17,8 @@ import {
     getToken,
     headersList,
     getTotalByKey,
+    getVehiclesWithUpdatedTotalNoCount,
+    getDestinationsWithNewVehicle,
 } from '../utils/utility';
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
@@ -122,43 +124,29 @@ const HomePage = () => {
 
     const handleVehicleChange = (e) => {
         e.stopPropagation();
-        const currName = e.target.name; //destination1
-        const currValue = e.target.value; //Space pod
+        //currDestination = destination1
+        //currVehicle = Space pod
 
-        const destination = destinationArray.find(
-            (destination) => destination.name === currName
+        const currDestination = destinationArray.find(
+            (destination) => destination.name === e.target.name
         );
-
-        const oldSelectedValue = destination.selectedVehicle;
 
         const currVehicle = vehicles.find(
-            (vehicle) => vehicle.name === currValue
+            (vehicle) => vehicle.name === e.target.value
         );
 
-        const builDestinations = destinationArray.map((item) => {
-            if (item.name === currName)
-                return {
-                    ...item,
-                    selectedVehicle: currValue,
-                    timeTaken: item.distance / currVehicle.speed,
-                };
+        const buildVehicle = getVehiclesWithUpdatedTotalNoCount(
+            vehicles,
+            currDestination.selectedVehicle,
+            currVehicle.name
+        );
 
-            return item;
-        });
+        const builDestinations = getDestinationsWithNewVehicle(
+            destinationArray,
+            currDestination.name,
+            currVehicle
+        );
 
-        const buildVehicle = vehicles.map((vehicle) => {
-            if (vehicle.name === currValue)
-                return {
-                    ...vehicle,
-                    total_no: vehicle.total_no - 1,
-                };
-            if (vehicle.name === oldSelectedValue)
-                return {
-                    ...vehicle,
-                    total_no: vehicle.total_no + 1,
-                };
-            return vehicle;
-        });
         setDestinationArray(builDestinations);
         setVehicles(buildVehicle);
     };
