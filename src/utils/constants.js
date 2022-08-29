@@ -46,28 +46,4 @@ const defaultDestinationArray = [
     },
 ];
 
-const footerData = [
-    {
-        id: 1,
-        key: 'challenge',
-        link: 'https://www.geektrust.com/challenge/space',
-        text: 'Challenge by geektrust.in',
-        colour: 'white',
-    },
-    {
-        id: 2,
-        key: 'linkedin',
-        link: 'https://www.linkedin.com/in/rahulchaudhary2244/',
-        text: 'Coded by Rahul Chaudhary',
-        colour: '#ffcc70',
-    },
-    {
-        id: 3,
-        key: 'github',
-        link: 'https://github.com/rahulchaudhary2244',
-        text: 'Github',
-        colour: 'white',
-    },
-];
-
-export { config, headersList, defaultDestinationArray, footerData };
+export { config, headersList, defaultDestinationArray };

@@ -1,4 +1,4 @@
-// Definition of Data Structures used
+// Definition of Data Structures used in this project
 /**
  * @typedef {Object} PlanetItem - Data related to planet
  *
@@ -25,16 +25,6 @@
  * @property {number} planetDistance
  * @property {string} selectedVehicle
  * @property {number} timeTaken
- */
-
-/**
- * @typedef {Object} FooterItem - Data to display footer values
- *
- * @property {number} id
- * @property {string} key
- * @property {string} link
- * @property {string} text
- * @property {string} colour
  */
 
 /**

@@ -7,6 +7,7 @@ import {
     styled,
     Typography,
     Button,
+    CircularProgress,
 } from '@mui/material';
 import Header from './Header';
 import Footer from './stateless/Footer';
@@ -26,6 +27,7 @@ import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 // Definition of Data Structures used
 /**
@@ -57,7 +59,9 @@ const HomePage = () => {
     const [destinationArray, setDestinationArray] = useState(
         defaultDestinationArray
     );
+    const [isLoading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
     /**
      *
@@ -66,13 +70,19 @@ const HomePage = () => {
     const getPlanets = async () => {
         const API_URL = `${config.endpoint}/planets`;
         try {
+            setLoading(true);
             const response = await axios.get(API_URL);
             if (response.status !== 200)
                 throw new Error('Planets list not fetched');
             setPlanets(response.data);
+            setLoading(false);
             return response.data;
         } catch (err) {
-            console.log(err);
+            setPlanets([]);
+            setLoading(false);
+            enqueueSnackbar(err, {
+                variant: 'error',
+            });
             return [];
         }
     };
@@ -84,13 +94,19 @@ const HomePage = () => {
     const getVehicles = async () => {
         const API_URL = `${config.endpoint}/vehicles`;
         try {
+            setLoading(true);
             const response = await axios.get(API_URL);
             if (response.status !== 200)
                 throw new Error('Vehicles list not fetched');
             setVehicles(response.data);
+            setLoading(false);
             return response.data;
         } catch (err) {
-            console.log(err);
+            setVehicles([]);
+            setLoading(false);
+            enqueueSnackbar(err, {
+                variant: 'error',
+            });
             return [];
         }
     };
@@ -99,6 +115,7 @@ const HomePage = () => {
      * Make a POST request to get result of finding falcone and route to /result
      */
     const postFindFalcone = async () => {
+        setLoading(true);
         const API_URL = `${config.endpoint}/find`;
         const payload = {
             token: await getToken(),
@@ -114,6 +131,7 @@ const HomePage = () => {
         };
         try {
             const response = await axios.post(API_URL, payload, header);
+            setLoading(false);
             navigate('/result', {
                 state: {
                     result: response.data,
@@ -121,7 +139,10 @@ const HomePage = () => {
                 },
             });
         } catch (err) {
-            console.log(err.response.data.error);
+            setLoading(false);
+            enqueueSnackbar(err.response.data?.error, {
+                variant: 'error',
+            });
         }
     };
 
@@ -276,22 +297,26 @@ const HomePage = () => {
                         padding: { xs: '2rem 0', md: '1rem 0', lg: '2rem 0 0' },
                     }}
                 >
-                    <Button
-                        variant="contained"
-                        onClick={handleFindFalconeClick}
-                    >
-                        <Typography
-                            variant="h6"
-                            sx={{
-                                padding: '0 0.5rem',
-                                fontWeight: 700,
-                                letterSpacing: '0.1rem',
-                                textTransform: 'capitalize',
-                            }}
+                    {isLoading ? (
+                        <CircularProgress />
+                    ) : (
+                        <Button
+                            variant="contained"
+                            onClick={handleFindFalconeClick}
                         >
-                            Find Falcone! 🚀
-                        </Typography>
-                    </Button>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    padding: '0 0.5rem',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.1rem',
+                                    textTransform: 'capitalize',
+                                }}
+                            >
+                                Find Falcone! 🚀
+                            </Typography>
+                        </Button>
+                    )}
                 </Box>
             </Box>
             <Footer />
