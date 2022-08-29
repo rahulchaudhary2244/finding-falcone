@@ -1,4 +1,4 @@
-import MainComponent from './components/MainComponent';
+import HomePage from './components/HomePage';
 import FalconeResult from './components/FalconeResult';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './utils/theme';
@@ -9,7 +9,7 @@ function App() {
         <div className="App">
             <ThemeProvider theme={theme}>
                 <Switch>
-                    <Route exact path="/" component={MainComponent} />
+                    <Route exact path="/" component={HomePage} />
                     <Route exact path="/result" component={FalconeResult} />
                 </Switch>
             </ThemeProvider>
