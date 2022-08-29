@@ -45,7 +45,7 @@ const Destination = ({
             </Box>
 
             <Typography component="div" mb={2}>
-                Distance: {planetDistance}
+                Planet Distance: {planetDistance}
             </Typography>
         </>
     );

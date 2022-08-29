@@ -6,18 +6,10 @@ import {
     RadioGroup,
     Radio,
 } from '@mui/material';
+import { isVehicleDisabledForSelection } from '../utils/helper';
 
 const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
     const { name, planetDistance, selectedVehicle } = destination;
-
-    /**
-     *
-     * @param {number} max_distance
-     * @param {number} available_count
-     * @returns {boolean}
-     */
-    const isDisbaled = (max_distance, available_count) =>
-        planetDistance > max_distance || available_count === 0;
 
     return (
         <Box>
@@ -31,7 +23,11 @@ const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
                     {vehicles.map(({ name, total_no, max_distance }, idx) => (
                         <FormControlLabel
                             key={idx}
-                            disabled={isDisbaled(max_distance, total_no)}
+                            disabled={isVehicleDisabledForSelection(
+                                planetDistance,
+                                max_distance,
+                                total_no
+                            )}
                             value={name}
                             control={<Radio />}
                             label={`${name} (${total_no})`}

@@ -27,6 +27,22 @@ import Destination from './Destination';
 import Vehicle from './Vehicle';
 import { useHistory } from 'react-router-dom';
 
+// Definition of Data Structures used
+/**
+ * @typedef {Object} PlanetItem - Data related to planet
+ *
+ * @property {string} name
+ * @property {number} distance
+ */
+/**
+ * @typedef {Object} VehileItem - Data related to vehicle
+ *
+ * @property {string} name
+ * @property {number} total_no
+ * @property {number} max_distance
+ * @property {number} speed
+ */
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#f8f0f0d0',
     ...theme.typography.body2,
@@ -45,7 +61,7 @@ const HomePage = () => {
 
     /**
      *
-     * @returns {Promise.Array.<PlanetItem>}
+     * @returns {Promise.Array.<PlanetItem>} array of planet
      */
     const getPlanets = async () => {
         const API_URL = `${config.endpoint}/planets`;
@@ -63,7 +79,7 @@ const HomePage = () => {
 
     /**
      *
-     * @returns {Promise.Array<VehileItem>}
+     * @returns {Promise.Array<VehileItem>} array of vehicle
      */
     const getVehicles = async () => {
         const API_URL = `${config.endpoint}/vehicles`;

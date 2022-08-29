@@ -2,8 +2,8 @@ import axios from 'axios';
 import { config, headersList } from './constants';
 
 /**
- *
- * @returns {string|null} returns JWT token fetched from backend
+ *returns JWT token fetched from backend
+ * @returns {string|null} JWT string or null
  */
 const getToken = async () => {
     const API_URL = `${config.endpoint}/token`;
