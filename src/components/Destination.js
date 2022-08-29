@@ -7,7 +7,6 @@ import {
     InputLabel,
     Select,
 } from '@mui/material';
-// import { filterPlanets } from '../utils/utility';
 
 const Destination = ({
     handleDropdownChange,
@@ -17,13 +16,13 @@ const Destination = ({
 }) => {
     const filterPlanets = (key) => {
         const names = destinationArray
-            .filter((item) => item.key !== key && item.value.length)
-            .map((item) => item.value);
+            .filter((item) => item.key !== key && !!item.selectedPlanet)
+            .map((item) => item.selectedPlanet);
         const arr = planets.filter(({ name }) => !!!names.includes(name));
         return arr;
     };
 
-    const { value, label, name, distance, key } = destination;
+    const { selectedPlanet, label, name, planetDistance, key } = destination;
     const filteredPlanets = filterPlanets(key);
 
     return (
@@ -32,7 +31,7 @@ const Destination = ({
                 <FormControl fullWidth>
                     <InputLabel>{label}</InputLabel>
                     <Select
-                        value={value || ''}
+                        value={selectedPlanet || ''}
                         label={label}
                         name={name}
                         onChange={handleDropdownChange}
@@ -47,7 +46,7 @@ const Destination = ({
             </Box>
 
             <Typography component="div" mb={2}>
-                Distance: {distance}
+                Distance: {planetDistance}
             </Typography>
         </>
     );

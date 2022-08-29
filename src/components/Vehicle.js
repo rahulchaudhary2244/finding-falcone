@@ -8,9 +8,9 @@ import {
 } from '@mui/material';
 
 const Vehicle = ({ vehicles, destination, handleVehicleChange }) => {
-    const { name, distance, selectedVehicle } = destination;
+    const { name, planetDistance, selectedVehicle } = destination;
     const isDisbaled = (max_distance, available_count) =>
-        distance > max_distance || available_count === 0;
+        planetDistance > max_distance || available_count === 0;
 
     return (
         <Box>

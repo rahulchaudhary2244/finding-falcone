@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { footerData } from '../utils/utility';
+import { footerData } from '../utils/constants';
 
 const Footer = () => {
     return (
