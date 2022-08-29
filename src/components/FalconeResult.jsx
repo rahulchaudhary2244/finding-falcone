@@ -3,7 +3,7 @@ import { Box, Typography, Button } from '@mui/material';
 import Header from './Header';
 import { useHistory, useLocation } from 'react-router-dom';
 import ResultTitle from './ResultTitle';
-import Footer from './Footer';
+import Footer from './stateless/Footer';
 
 const FalconeResult = () => {
     const history = useHistory();

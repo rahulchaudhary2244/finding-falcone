@@ -9,7 +9,7 @@ import {
     Button,
 } from '@mui/material';
 import Header from './Header';
-import Footer from './Footer';
+import Footer from './stateless/Footer';
 import axios from 'axios';
 import { getToken } from '../utils/utility';
 import {
