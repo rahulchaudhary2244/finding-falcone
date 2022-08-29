@@ -2,16 +2,16 @@ import HomePage from './components/HomePage';
 import FalconeResult from './components/FalconeResult';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './utils/theme';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
     return (
         <div className="App">
             <ThemeProvider theme={theme}>
-                <Switch>
-                    <Route exact path="/" component={HomePage} />
-                    <Route exact path="/result" component={FalconeResult} />
-                </Switch>
+                <Routes>
+                    <Route exact path="/" element={<HomePage />} />
+                    <Route exact path="/result" element={<FalconeResult />} />
+                </Routes>
             </ThemeProvider>
         </div>
     );

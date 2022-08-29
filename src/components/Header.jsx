@@ -3,7 +3,10 @@ import { Box, Typography, Button } from '@mui/material';
 
 const Header = ({ handleResetClick, showReset }) => {
     return (
-        <Box className="header">
+        <Box
+            className="header"
+            sx={{ flexDirection: { xs: 'row-reverse', sm: 'row' } }}
+        >
             <Typography
                 variant="h5"
                 noWrap
@@ -13,12 +16,10 @@ const Header = ({ handleResetClick, showReset }) => {
                 rel="noopener"
                 sx={{
                     padding: '0 1rem',
-                    mr: 2,
-                    display: { xs: showReset ? 'none' : 'flex', sm: 'flex' },
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     letterSpacing: '0.2rem',
-                    color: 'white',
+                    color: { xs: '#8b0d9a', sm: 'white' },
                     textDecoration: 'none',
                 }}
             >
@@ -33,7 +34,8 @@ const Header = ({ handleResetClick, showReset }) => {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '0.1rem',
-                            color: { xs: 'white', sm: '#4d0655f2' },
+                            fontSize: '1rem',
+                            color: { xs: 'white', sm: '#8b0d9a' },
                         }}
                     >
                         RESET

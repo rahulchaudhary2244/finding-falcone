@@ -25,7 +25,7 @@ import {
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
 import Vehicle from './Vehicle';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Definition of Data Structures used
 /**
@@ -57,7 +57,7 @@ const HomePage = () => {
     const [destinationArray, setDestinationArray] = useState(
         defaultDestinationArray
     );
-    const history = useHistory();
+    const navigate = useNavigate();
 
     /**
      *
@@ -114,8 +114,7 @@ const HomePage = () => {
         };
         try {
             const response = await axios.post(API_URL, payload, header);
-            history.push({
-                pathname: '/result',
+            navigate('/result', {
                 state: {
                     result: response.data,
                     timeTaken: getTotalByKey(destinationArray, 'timeTaken'),
