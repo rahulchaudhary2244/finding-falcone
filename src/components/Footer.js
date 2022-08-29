@@ -17,6 +17,7 @@ const Footer = () => {
                     color: 'white',
                     textDecoration: 'none',
                     textAlign: 'center',
+                    fontSize: '1rem',
                 }}
             >
                 Challenge by geektrust.in
@@ -34,6 +35,7 @@ const Footer = () => {
                     color: '#ffcc70',
                     textDecoration: 'none',
                     textAlign: 'center',
+                    fontSize: '1rem',
                 }}
             >
                 Coded by Rahul Chaudhary
@@ -51,6 +53,7 @@ const Footer = () => {
                     color: 'white',
                     textDecoration: 'none',
                     textAlign: 'center',
+                    fontSize: '1rem',
                 }}
             >
                 Github
