@@ -13,9 +13,10 @@ import Footer from './Footer';
 import axios from 'axios';
 import {
     config,
-    getDestinationArray,
+    defaultDestinationArray,
     getToken,
     headersList,
+    getTotalByKey,
 } from '../utils/utility';
 import HeroTitle from './stateless/HeroTitle';
 import Destination from './Destination';
@@ -30,39 +31,38 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary, //#641db933
 }));
 
-const MainComponent = () => {
+const HomePage = () => {
     const [planets, setPlanets] = useState([]);
     const [vehicles, setVehicles] = useState([]);
     const [destinationArray, setDestinationArray] = useState(
-        getDestinationArray()
+        defaultDestinationArray
     );
     const history = useHistory();
 
     const getPlanets = async () => {
+        const API_URL = `${config.endpoint}/planets`;
         try {
-            const response = await axios.get(`${config.endpoint}/planets`);
-            if (response.status !== 200) return [];
+            const response = await axios.get(API_URL);
+            if (response.status !== 200)
+                throw new Error('Planets list not fetched');
             setPlanets(response.data);
             return response.data;
         } catch (err) {
-            console.log('Fetching planets failed');
+            console.log(err);
             return [];
         }
     };
 
     const getVehicles = async () => {
+        const API_URL = `${config.endpoint}/vehicles`;
         try {
-            const response = await axios.get(`${config.endpoint}/vehicles`);
-            if (response.status !== 200) return [];
-            const buildVehicle = response.data.map((vehicle) => {
-                return {
-                    ...vehicle,
-                };
-            });
-            setVehicles(buildVehicle);
-            return buildVehicle;
+            const response = await axios.get(API_URL);
+            if (response.status !== 200)
+                throw new Error('Vehicles list not fetched');
+            setVehicles(response.data);
+            return response.data;
         } catch (err) {
-            console.log('Fetching vehicles failed');
+            console.log(err);
             return [];
         }
     };
@@ -85,10 +85,7 @@ const MainComponent = () => {
                 pathname: '/result',
                 state: {
                     result: response.data,
-                    timeTaken: destinationArray.reduce(
-                        (p, c) => p + c.timeTaken,
-                        0
-                    ),
+                    timeTaken: getTotalByKey(destinationArray, 'timeTaken'),
                 },
             });
         } catch (err) {
@@ -120,7 +117,7 @@ const MainComponent = () => {
         e.stopPropagation();
         getPlanets();
         getVehicles();
-        setDestinationArray(getDestinationArray());
+        setDestinationArray(defaultDestinationArray);
     };
 
     const handleVehicleChange = (e) => {
@@ -233,9 +230,9 @@ const MainComponent = () => {
                                 textAlign: 'center',
                             }}
                         >
-                            {`Time taken: ${destinationArray.reduce(
-                                (p, c) => p + c.timeTaken,
-                                0
+                            {`Time taken: ${getTotalByKey(
+                                destinationArray,
+                                'timeTaken'
                             )} ⏰`}
                         </Typography>
                     </Box>
@@ -268,4 +265,4 @@ const MainComponent = () => {
     );
 };
 
-export default MainComponent;
+export default HomePage;

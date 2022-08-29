@@ -23,7 +23,7 @@ const getToken = async () => {
     }
 };
 
-const getDestinationArray = () => [
+const defaultDestinationArray = [
     {
         key: 1,
         label: 'Destination 1',
@@ -62,4 +62,38 @@ const getDestinationArray = () => [
     },
 ];
 
-export { config, headersList, getToken, getDestinationArray };
+const footerData = [
+    {
+        id: 1,
+        key: 'challenge',
+        link: 'https://www.geektrust.com/challenge/space',
+        text: 'Challenge by geektrust.in',
+        colour: 'white',
+    },
+    {
+        id: 2,
+        key: 'linkedin',
+        link: 'https://www.linkedin.com/in/rahulchaudhary2244/',
+        text: 'Coded by Rahul Chaudhary',
+        colour: '#ffcc70',
+    },
+    {
+        id: 3,
+        key: 'github',
+        link: 'https://github.com/rahulchaudhary2244',
+        text: 'Github',
+        colour: 'white',
+    },
+];
+
+const getTotalByKey = (array, key) =>
+    array.reduce((previous, current) => previous + current[key], 0);
+
+export {
+    config,
+    headersList,
+    getToken,
+    defaultDestinationArray,
+    footerData,
+    getTotalByKey,
+};
