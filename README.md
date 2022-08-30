@@ -35,3 +35,10 @@ Start the server | NOTE: Server will start at default port 3000, [http://localho
 ```bash
   npm start
 ```
+
+Test
+
+```bash
+  npm test
+```
+
