@@ -6,18 +6,22 @@ This coding challenge is provided by geektrust.in, [click here to view the probl
 
 View deployed app here [finding-falcone-by-rahul](https://finding-falcone-by-rahul.netlify.app/)
 
+## Demo
+
+![Alt Text](./Demo.gif)
+
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/rahulchaudhary2244/finding-falcone.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd finding-falcone
 ```
 
 Install dependencies
@@ -31,5 +35,3 @@ Start the server | NOTE: Server will start at default port 3000, [http://localho
 ```bash
   npm start
 ```
-
-## Demo
