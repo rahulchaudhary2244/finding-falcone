@@ -8,7 +8,7 @@ View deployed app here [finding-falcone-by-rahul](https://finding-falcone-by-rah
 
 ## Demo
 
-![Alt Text](Demo.gif)
+![finding-falcone-demo.gif](https://github.com/rahulchaudhary2244/media-repository/blob/main/finding-falcone-demo.gif)
 
 ## Run Locally
 
